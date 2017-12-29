@@ -1,0 +1,97 @@
+[
+    {
+        "id": "6c2ca0be.c2251",
+        "type": "inject",
+        "z": "3e0e5a80.8d06b6",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "x": 90,
+        "y": 60,
+        "wires": [
+            [
+                "4cb30cb7.0d10a4"
+            ]
+        ]
+    },
+    {
+        "id": "4cb30cb7.0d10a4",
+        "type": "function",
+        "z": "3e0e5a80.8d06b6",
+        "name": "Payload",
+        "func": "msg.headers={\n    deviceKey:\"jBRdiDhbM0dZhHo8\"\n    };\n    \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 300,
+        "y": 60,
+        "wires": [
+            [
+                "62a4c457.75920c",
+                "b02c49fe.517d78"
+            ]
+        ]
+    },
+    {
+        "id": "62a4c457.75920c",
+        "type": "http request",
+        "z": "3e0e5a80.8d06b6",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "url": "https://api.mediatek.com/mcs/v2/devices/DoMxbTXU/datachannels/Humidity/datapoints.csv",
+        "tls": "",
+        "x": 470,
+        "y": 100,
+        "wires": [
+            [
+                "c79010bb.492cb",
+                "4387f7b3.c22478"
+            ]
+        ]
+    },
+    {
+        "id": "c79010bb.492cb",
+        "type": "debug",
+        "z": "3e0e5a80.8d06b6",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 730,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "b02c49fe.517d78",
+        "type": "http request",
+        "z": "3e0e5a80.8d06b6",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "url": "https://api.mediatek.com/mcs/v2/devices/DoMxbTXU/datachannels/Temperature/datapoints.csv",
+        "tls": "",
+        "x": 470,
+        "y": 40,
+        "wires": [
+            [
+                "c79010bb.492cb",
+                "4387f7b3.c22478"
+            ]
+        ]
+    },
+    {
+        "id": "4387f7b3.c22478",
+        "type": "http response",
+        "z": "3e0e5a80.8d06b6",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 716,
+        "y": 45,
+        "wires": []
+    }
+]
