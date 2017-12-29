@@ -1,0 +1,95 @@
+[
+    {
+        "id": "fb7fbefd.9938a",
+        "type": "inject",
+        "z": "d979c0a.2deaf4",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "x": 110,
+        "y": 100,
+        "wires": [
+            [
+                "df962850.3af2e8",
+                "1762410.977d1bf"
+            ]
+        ]
+    },
+    {
+        "id": "df962850.3af2e8",
+        "type": "function",
+        "z": "d979c0a.2deaf4",
+        "name": "Payload",
+        "func": "msg.headers={\n    deviceKey:\"jBRdiDhbM0dZhHo8\"\n};\nmsg.payload=\"Temperature,,20\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 283,
+        "y": 177,
+        "wires": [
+            [
+                "c05da1c1.df19c"
+            ]
+        ]
+    },
+    {
+        "id": "c05da1c1.df19c",
+        "type": "http request",
+        "z": "d979c0a.2deaf4",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "url": "https://api.mediatek.com/mcs/v2/devices/DoMxbTXU/datapoints.csv",
+        "tls": "",
+        "x": 470,
+        "y": 200,
+        "wires": [
+            [
+                "4ce9e726.6d32d8",
+                "652f0892.fce9e8"
+            ]
+        ]
+    },
+    {
+        "id": "4ce9e726.6d32d8",
+        "type": "http response",
+        "z": "d979c0a.2deaf4",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 670,
+        "y": 158,
+        "wires": []
+    },
+    {
+        "id": "652f0892.fce9e8",
+        "type": "debug",
+        "z": "d979c0a.2deaf4",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 640,
+        "y": 249,
+        "wires": []
+    },
+    {
+        "id": "1762410.977d1bf",
+        "type": "function",
+        "z": "d979c0a.2deaf4",
+        "name": "Payload",
+        "func": "msg.headers={\n    deviceKey:\"jBRdiDhbM0dZhHo8\"\n};\nmsg.payload=\"Humidity,,60\";\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 279,
+        "y": 233,
+        "wires": [
+            [
+                "c05da1c1.df19c"
+            ]
+        ]
+    }
+]
